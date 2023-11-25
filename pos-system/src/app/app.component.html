@@ -1,0 +1,22 @@
+<div id="productList">
+  <!-- Product listing on the right side -->
+  <!-- Each product item should have a unique identifier -->
+  <!-- Example: <div class="product" id="product1">Product 1</div> -->
+  <div class="product" id="product1">Product 1</div>
+  <div class="product" id="product2">Product 2</div>
+  <div class="product" id="product3">Product 3</div>
+</div>
+
+<div id="shoppingCart">
+  <!-- Left side with shopping cart details -->
+  <p id="emptyCartMessage">THERE ARE NO PRODUCTS</p>
+  <!-- Fields for Sub Total, VAT Tax, Discount, and Total -->
+  <input type="text" id="subTotal" placeholder="Sub Total" readonly>
+  <input type="text" id="vatTax" placeholder="VAT Tax">
+  <input type="text" id="discount" placeholder="Discount">
+  <input type="text" id="total" placeholder="Total" readonly>
+
+  <!-- Buttons to cancel or process the sale -->
+  <button onclick="cancelSale()">CANCEL SALE</button>
+  <button onclick="processSale()">PROCESS SALE</button>
+</div>
