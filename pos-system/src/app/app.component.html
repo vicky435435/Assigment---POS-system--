@@ -18,19 +18,23 @@
 
 
     <div style="width: 96%; height: 55%; margin: 1vw;">
-
-
-      <div *ngFor="let product of products; let i = index">
-        <span>{{ product.name }}</span>
-        <span>{{ product.quantity }}</span>
-        <span>{{ product.price | currency }}</span>
-        <button class="deletebtn" (click)="deleteItem(i)">*</button>
-        <button (click)="updateQuantity(i, 1)">+</button>
-        <button (click)="updateQuantity(i, -1)">-</button>
-        <hr>
+      <div *ngIf="cartProductList.length != 0">
+        <div *ngFor="let data of cartProductList; let i = index"
+          style="background-color: white;  height: 43px;display: flex;justify-content: space-between;">
+          <button (click)="removeItem($event , i)" style=" padding: 0px;margin: 10px 5px;border: none;"><img
+              style="width: 15px; height: 15px;" src="./assets/close.png" alt="close"></button>
+          <label style="vertical-align: middle;margin-right: 13px;">{{cartProductList[i].name}}</label>
+          <label style="vertical-align: middle;margin-right: 13px;">{{cartProductList[i].price}}</label>
+          <label>
+            <img (click)="onclickplus()" style="width: 15px; height: 15px;" src="./assets/add.png" alt="close">
+            <input type="number" value="{{quan}}" style="vertical-align: middle;margin-right: 13px;width: 3vw;margin-left: 13px;">
+            <img (click)="onclicksub()" style="width: 15px; height: 15px;" src="./assets/minus.png" alt="close">
+          </label>
+          <label style="vertical-align: middle;margin-right: 13px;">4000 INR</label>
+        </div>
       </div>
 
-      <div
+      <div *ngIf="cartProductList.length == 0"
         style="background-color: white;  height: 50%;font-size: xx-large;    display: flex;justify-content: center;align-items: center">
         <label>THERE ARE NO PRODUCTS</label>
       </div>

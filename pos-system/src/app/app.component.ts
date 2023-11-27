@@ -17,6 +17,7 @@ interface Product {
 })
 export class AppComponent {
   // cartProductList = [];
+  quan : number = 1;
   cartProductList: { name: string; price: number; category: string; image: string; }[] = [];
   
 
@@ -164,20 +165,20 @@ export class AppComponent {
     console.log('1',this.cartProductList)
   }
   
-  onclickImage(event: any, value: number) {
-    console.log(event)
-    console.log(value)
-    console.log('1',this.cartProductList)
+  // onclickImage(event: any, value: number) {
+  //   console.log(event)
+  //   console.log(value)
+  //   console.log('1',this.cartProductList)
 
-    const productExistInCart = this.cartProductList.find(({ name }) => name === this.itemList[value].name);
-    console.log(productExistInCart)
-    console.log(!productExistInCart)
-    if (!productExistInCart) {
-      this.cartProductList.push(this.itemList[value]); // enhance "porduct" opject with "num" property
-      console.log('cpl', this.cartProductList)
-      return; 
-    }
-  } 
+  //   const productExistInCart = this.cartProductList.find(({ name }) => name === this.itemList[value].name);
+  //   console.log(productExistInCart)
+  //   console.log(!productExistInCart)
+  //   if (!productExistInCart) {
+  //     this.cartProductList.push(this.itemList[value]); // enhance "porduct" opject with "num" property
+  //     console.log('cpl', this.cartProductList)
+  //     return; 
+  //   }
+  // } 
   products: Product[] = [
     { id: 1, name: 'Product 1', quantity: 1, price: 10 },
     { id: 2, name: 'Product 2', quantity: 2, price: 20 },
@@ -214,6 +215,40 @@ export class AppComponent {
       // If the product is not selected, add it to the selected products array
       this.selectedProducts.push({ name: productName, quantity: 1 });
     }
+  }
+
+  onclickImage(event: any, value: number) {
+    console.log(event)
+    console.log(value)
+    console.log('1',this.cartProductList)
+
+    const productExistInCart = this.cartProductList.find(({ name }) => name === this.itemList[value].name);
+    console.log(productExistInCart)
+    console.log(!productExistInCart)
+    if (!productExistInCart) {
+      this.cartProductList.push(this.itemList[value]); // enhance "porduct" opject with "num" property
+      console.log('cpl', this.cartProductList)
+      return; 
+    }
+  } 
+
+  removeItem(event:any ,value:number) {
+    console.log(event)
+    console.log(value)
+    this.cartProductList.splice(value, 1);
+    console.log(this.cartProductList)
+   }
+
+   onclickplus(){
+    console.log('Plus')
+    this.quan++;
+    console.log(this.quan)
+  }
+
+  onclicksub(){
+    console.log('sub')
+    this.quan--;
+    console.log(this.quan)
   }
  
 }
