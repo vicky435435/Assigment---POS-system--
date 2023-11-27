@@ -1,22 +1,144 @@
-<div id="productList">
-  <!-- Product listing on the right side -->
-  <!-- Each product item should have a unique identifier -->
-  <!-- Example: <div class="product" id="product1">Product 1</div> -->
-  <div class="product" id="product1">Product 1</div>
-  <div class="product" id="product2">Product 2</div>
-  <div class="product" id="product3">Product 3</div>
+
+<main>
+  <div class="split left">
+    <div class="cent">
+      <div class="cart-container">
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+
+
+    <div style="width: 96%; height: 55%; margin: 1vw;">
+
+
+      <div *ngFor="let product of products; let i = index">
+        <span>{{ product.name }}</span>
+        <span>{{ product.quantity }}</span>
+        <span>{{ product.price | currency }}</span>
+        <button class="deletebtn" (click)="deleteItem(i)">*</button>
+        <button (click)="updateQuantity(i, 1)">+</button>
+        <button (click)="updateQuantity(i, -1)">-</button>
+        <hr>
+      </div>
+
+      <div
+        style="background-color: white;  height: 50%;font-size: xx-large;    display: flex;justify-content: center;align-items: center">
+        <label>THERE ARE NO PRODUCTS</label>
+      </div>
+    </div>
+
+
+    <div style="display: flex;">
+      <div id="shoppingCart"
+        style="display: grid; width: 46%; margin-left: 1vw;background-color: #F2F2F2;line-height: 30px;">
+        <!-- <table> -->
+        <div style="display: inline;border-style: solid none none none;border-width: 1px;">
+          <label class="m-3" type="text" id="subTotal"><strong>SubTotal</strong></label>
+        </div>
+        <div style="border-style: solid none none none;border-width: 1px;">
+          <label class="m-3" type="text" id="vatTax"><strong>VAT Tax</strong></label>
+        </div>
+        <div style="border-style: solid none none none;border-width: 1px;">
+          <label class="m-3" type="text" id="discount"><strong>Discount</strong></label>
+        </div>
+        <div style="border-style: solid none none none;border-width: 1px;">
+          <label type="text" id="total"><strong class="m-3">Total</strong></label>
+        </div>
+        <!-- </table> -->
+      </div>
+
+
+      <div id="shoppingCart" style="display: grid; width: 50%; line-height: 30px;">
+        <!-- <table> -->
+        <div
+          style="display: flex; justify-content: space-between;border-style: solid none none none;border-width: 1px;">
+          <label class="m-3" type="text" id="subTotal">200.00</label>
+          <label class="m-3" for="item"><strong>2 Items</strong></label>
+        </div>
+        <div
+          style="display: flex; justify-content: space-between;border-style: solid none none none;border-width: 1px;">
+          <label class="m-3" type="text" id="vatTax">10%</label>
+          <label class="m-3"><strong>0.400 <span>&#8377;</span></strong></label>
+        </div>
+        <div
+          style="display: flex; justify-content: space-between;border-style: solid none none none;border-width: 1px;">
+          <label class="m-3" type="text" id="discount">10%</label>
+          <label class="m-3"><strong>0.400 <span>&#8377;</span></strong></label>
+        </div>
+        <div style="display: flex;border-style: solid none none none;border-width: 1px;">
+          <label class="m-3" type="text" id="total">50,000 <span>&#8377;</span></label>
+        </div>
+        <!-- </table> -->
+      </div>
+
+    </div>
+
+    <div style="display: inline-block; width: 100%; text-align: center;">
+      <button style="background-color: #EA4335;color: white; margin: 0.5vw; width:45%; height: 2.5vw; border: none;"
+        onclick="cancelSale()">CANCEL SALE</button>
+      <button style="background-color: #25D366; color: white; margin: 0.5vw; width:45%; height: 2.5vw; border: none;"
+        onclick="processSale()">PROCESS SALE</button>
+    </div>
+
+  </div>
+
+
+  <div class="split right">
+    <div class="centered">
+
+      <div class="right-side">
+        <img *ngFor="let data of itemList; let i = index" class="pgigm" (click)="onclickImage($event, i)"
+          src="./assets/{{itemList[i].image}}" alt="computer">
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- product-selection.component.html -->
+<div class="container">
+  <div class="products">
+    <h2>Available Products</h2>
+    <div *ngFor="let product of availableProducts" class="product" (click)="addProduct(product)">
+      {{ product }}
+    </div>
+  </div>
+  <div class="selected-products">
+    <h2>Selected Products</h2>
+    <div *ngFor="let product of selectedProducts" class="product">
+      {{ product.name }} <span class="quantity">{{ product.quantity }}</span>
+    </div>
+  </div>
 </div>
 
-<div id="shoppingCart">
-  <!-- Left side with shopping cart details -->
-  <p id="emptyCartMessage">THERE ARE NO PRODUCTS</p>
-  <!-- Fields for Sub Total, VAT Tax, Discount, and Total -->
-  <input type="text" id="subTotal" placeholder="Sub Total" readonly>
-  <input type="text" id="vatTax" placeholder="VAT Tax">
-  <input type="text" id="discount" placeholder="Discount">
-  <input type="text" id="total" placeholder="Total" readonly>
 
-  <!-- Buttons to cancel or process the sale -->
-  <button onclick="cancelSale()">CANCEL SALE</button>
-  <button onclick="processSale()">PROCESS SALE</button>
+<!-- <div>
+  <h1>Home</h1>
+  <p>{{bodyText}}</p>
+  <button (click)="openModal('custom-modal-1')">Open Modal 1</button>
+  <button (click)="openModal('custom-modal-2')">Open Modal 2</button>
 </div>
+
+<jw-modal id="custom-modal-1">
+  <h1>A Custom Modal Window!</h1>
+  <p>Home page text: <input type="text" [(ngModel)]="bodyText" /></p>
+  <button (click)="closeModal('custom-modal-1');">Close</button>
+</jw-modal>
+
+<jw-modal id="custom-modal-2">
+  <h1 style="height:1000px">A Tall Custom Modal Window!</h1>
+  <button (click)="closeModal('custom-modal-2');">Close</button>
+</jw-modal> -->
+
+<router-outlet></router-outlet>
+
+
+
